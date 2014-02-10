@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/tx
+                           http://www.springframework.org/schema/tx/spring-tx.xsd
+                           http://www.springframework.org/schema/data/jpa
+                           http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
+
+    <tx:annotation-driven/>
+
+    <jpa:repositories base-package="com.github.jntakpe.j2utils.repository"/>
+
+    <!--<jdbc:initialize-database data-source="dataSource">-->
+    <!--&lt;!&ndash;<jdbc:script location="classpath:sql/parameters.sql" encoding="UTF-8"/>&ndash;&gt;-->
+    <!--</jdbc:initialize-database>-->
+
+    <bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource">
+        <constructor-arg ref="poolConfig"/>
+    </bean>
+
+    <bean id="poolConfig" class="com.zaxxer.hikari.HikariConfig">
+        <property name="dataSourceClassName" value="org.postgresql.ds.PGSimpleDataSource"/>
+        <property name="acquireRetryDelay" value="1000"/>
+        <property name="maximumPoolSize" value="50"/>
+        <property name="minimumPoolSize" value="2"/>
+        <property name="connectionTestQuery" value="SELECT 1"/>
+        <property name="dataSourceProperties">
+            <props>
+                <prop key="user">postgres</prop>
+                <prop key="password">sopra*</prop>
+                <prop key="databaseName">j2utils</prop>
+                <prop key="serverName">localhost</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+        <property name="jpaVendorAdapter">
+            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"/>
+        </property>
+        <property name="dataSource" ref="dataSource"/>
+        <property name="packagesToScan" value="com.github.jntakpe.j2utils.domain"/>
+        <property name="jpaProperties">
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQL82Dialect</prop>
+                <prop key="hibernate.hbm2ddl.auto">${hibernate.generate}</prop>
+                <prop key="hibernate.show_sql">${hibernate.verbose}</prop>
+                <prop key="hibernate.format_sql">${hibernate.verbose}</prop>
+                <prop key="hibernate.generate_statistics">${hibernate.stats}</prop>
+                <prop key="hibernate.cache.use_second_level_cache">false</prop>
+                <prop key="hibernate.cache.use_query_cache">false</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="entityManagerFactory"/>
+    </bean>
+
+    <bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor"/>
+
+</beans>

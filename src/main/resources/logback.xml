@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration scan="true">
+
+    <property name="LOGS_FOLDER" value="C:/AppEnv/log/j2utils"/>
+    <property name="SAVE_FOLDER" value="${LOGS_FOLDER}/collect"/>
+
+    <!-- Log applicatives -->
+    <appender name="log-file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOGS_FOLDER}/fmktuto-applicatif.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${SAVE_FOLDER}/fmk-applicatif.%d{yyyyMMdd}.log</fileNamePattern>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{yyyy/MM/dd HH:mm:ss,SSS} [%thread] %-5level %logger{36} - %m %throwable{0}%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Log d'audit (sécurité) -->
+    <appender name="audit-file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOGS_FOLDER}/fmk-audit.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${SAVE_FOLDER}/fmktuto-audit.%d{yyyyMMdd}.log.gzip</fileNamePattern>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{yyyy/MM/dd HH:mm:ss,SSS} [%thread] %-5level %logger{36} - %m %throwable{0}%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Log de diagnostic (DEBUG) -->
+    <appender name="troubleshooting-file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOGS_FOLDER}/fmk-troubleshooting.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+            <fileNamePattern>${LOGS_FOLDER}/fmktuto-troubleshooting.%i.log</fileNamePattern>
+            <maxIndex>10</maxIndex>
+        </rollingPolicy>
+        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <maxFileSize>10MB</maxFileSize>
+        </triggeringPolicy>
+        <encoder>
+            <pattern>%d{yyyy/MM/dd HH:mm:ss,SSS} [%thread] %-5level %logger{36} - %m%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Console -->
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>%-4relative [%thread] %-5level %logger{35} - %msg %n</pattern>
+        </encoder>
+    </appender>
+
+    <root level="WARN">
+        <appender-ref ref="log-file"/>
+        <appender-ref ref="console"/>
+    </root>
+
+    <logger name="fr.sg" additivity="false" level="TRACE">
+        <appender-ref ref="console"/>
+        <appender-ref ref="audit-file"/>
+        <appender-ref ref="troubleshooting-file"/>
+    </logger>
+
+    <logger name="ch.qos.logback" level="WARN">
+        <appender-ref ref="console"/>
+    </logger>
+
+    <logger name="net.sf.ehcache" level="WARN">
+        <appender-ref ref="console"/>
+    </logger>
+
+    <logger name="org.apache" level="WARN">
+        <appender-ref ref="console"/>
+    </logger>
+
+    <logger name="org.hibernate.validator" level="WARN">
+        <appender-ref ref="console"/>
+    </logger>
+
+    <logger name="org.hibernate" level="WARN">
+        <appender-ref ref="console"/>
+    </logger>
+
+    <logger name="org.springframework" level="WARN">
+        <appender-ref ref="console"/>
+    </logger>
+
+    <logger name="org.springframework.web" level="WARN">
+        <appender-ref ref="console"/>
+    </logger>
+
+    <logger name="org.springframework.security" level="WARN">
+        <appender-ref ref="console"/>
+    </logger>
+
+    <logger name="org.springframework.cache" level="WARN">
+        <appender-ref ref="console"/>
+    </logger>
+
+
+</configuration>
