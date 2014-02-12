@@ -49,7 +49,7 @@
 
     <servlet-mapping>
         <servlet-name>metrics</servlet-name>
-        <url-pattern>/metrics/*</url-pattern>
+        <url-pattern>/admin/metrics/*</url-pattern>
     </servlet-mapping>
 
     <listener>
@@ -91,6 +91,10 @@
         <filter-name>instrumentedFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
+
+    <welcome-file-list>
+        <welcome-file>/index.html</welcome-file>
+    </welcome-file-list>
 
     <error-page>
         <error-code>500</error-code>

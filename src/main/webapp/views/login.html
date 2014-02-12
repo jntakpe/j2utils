@@ -1,0 +1,47 @@
+<div>
+    <div class="breadcrumbs margin-bottom-40">
+        <div class="container">
+            <h1 class="pull-left">Connection à j2Utils</h1>
+            <ul class="pull-right breadcrumb">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="">Pages</a></li>
+                <li class="active">Login</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="container">
+        <div id="login-frame" class="row">
+            <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
+                <form class="reg-page">
+                    <div class="alert alert-danger" ng-show="authenticationError">
+                        <span class="icon-warning-sign"></span>
+                        <strong>Échec de l'authentification</strong><br/>
+                        Merci de renseigner votre nom d'utilisateur et mot de passe Sopra Group
+                    </div>
+                    <div class="reg-header">
+                        <h2>Login</h2>
+                    </div>
+
+                    <div class="input-group margin-bottom-20">
+                        <span class="input-group-addon"><i class="icon-user"></i></span>
+                        <input type="text" placeholder="Nom d'utilisateur Sopra" class="form-control" ng-model="username">
+                    </div>
+                    <div class="input-group margin-bottom-20">
+                        <span class="input-group-addon"><i class="icon-lock"></i></span>
+                        <input type="text" placeholder="Mot de passe Sopra" class="form-control" ng-model="password">
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label class="checkbox"><input type="checkbox" ng-model="rememberMe" checked> Rester connecté</label>
+                        </div>
+                        <div class="col-md-6">
+                            <button class="btn-u pull-right" type="submit" ng-click="login()">Connexion</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

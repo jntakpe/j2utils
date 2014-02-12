@@ -1,3 +1,8 @@
+/* Correction du body en fonction de la taille du footer */
+body {
+    margin-bottom: 50px;
+}
+
 /* Page de login */
 .reg-page {
     color: #555;
@@ -21,4 +26,8 @@
 
 .reg-page label {
     color: #777;
+}
+
+#login-frame {
+    margin-top: 120px;
 }
