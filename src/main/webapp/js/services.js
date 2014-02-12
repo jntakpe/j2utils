@@ -2,15 +2,14 @@
 
 j2utilsApp.factory('Account', ['$resource',
     function ($resource) {
-        return $resource('app/rest/account', {}, {
-        });
+        return $resource('j2utils/rest/account');
     }]);
 
 j2utilsApp.factory('AuthenticationSharedService', ['$rootScope', '$http', 'authService',
         function ($rootScope, $http, authService) {
             return {
                 authenticate: function () {
-                    $http.get('app/rest/authenticate')
+                    $http.get('j2utils/rest/authenticate')
                         .success(function (data, status, headers, config) {
                             $rootScope.login = data;
                             if (data == '') {
@@ -23,7 +22,7 @@ j2utilsApp.factory('AuthenticationSharedService', ['$rootScope', '$http', 'authS
                 login: function (param) {
                     var data = "j_username=" + param.username + "&j_password=" + param.password + "&_spring_security_remember_me=" +
                         param.rememberMe + "&submit=Login";
-                    $http.post('app/authentication', data, {
+                    $http.post('j2utils/authentication', data, {
                         headers: {
                             "Content-Type": "application/x-www-form-urlencoded"
                         },
@@ -44,7 +43,7 @@ j2utilsApp.factory('AuthenticationSharedService', ['$rootScope', '$http', 'authS
                 },
                 logout: function () {
                     $rootScope.authenticationError = false;
-                    $http.get('app/logout')
+                    $http.get('j2utils/logout')
                         .success(function (data, status, headers, config) {
                             $rootScope.login = null;
                             authService.loginCancelled();
@@ -80,8 +79,8 @@ j2utilsApp.factory('AuthenticationSharedService', ['$rootScope', '$http', 'authS
             // Call when the 401 response is returned by the client
             $rootScope.$on('event:auth-loginRequired', function (rejection) {
                 $rootScope.authenticated = false;
-                if ($location.path() !== "/" && $location.path() !== "") {
-                    $location.path('/login').replace();
+                if ($location.path() !== '/' && $location.path() !== "") {
+                    $location.path('/').replace();
                 }
             });
 
@@ -92,8 +91,8 @@ j2utilsApp.factory('AuthenticationSharedService', ['$rootScope', '$http', 'authS
 
                 // If the login page has been requested and the user is already logged in
                 // the user is redirected to the home page
-                if ($location.path() === "/login") {
-                    $location.path('/').replace();
+                if ($location.path() === '/') {
+                    $location.path('/home').replace();
                 }
             });
 

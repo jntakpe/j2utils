@@ -17,22 +17,22 @@
     <s:http pattern="/plugins/**" security="none"/>
     <s:http pattern="/views/**" security="none"/>
 
-    <s:http pattern="/app/rest/**" entry-point-ref="http401UnauthorizedEntryPoint" use-expressions="true">
+    <s:http pattern="/j2utils/rest/**" entry-point-ref="http401UnauthorizedEntryPoint" use-expressions="true">
         <s:remember-me services-ref="customRememberMe" key="j2utils super secure key or not"/>
         <s:intercept-url pattern="/**" access="isAuthenticated()"/>
     </s:http>
 
     <s:http auto-config="true" use-expressions="true">
-        <s:intercept-url pattern="/app/**" access="isAuthenticated()"/>
+        <s:intercept-url pattern="/j2utils/**" access="isAuthenticated()"/>
         <s:intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')"/>
 
         <s:remember-me services-ref="customRememberMe" key="j2utils super secure key or not"/>
 
-        <s:form-login login-processing-url="/app/authentication" login-page="/" username-parameter="j_username"
+        <s:form-login login-processing-url="/j2utils/authentication" login-page="/" username-parameter="j_username"
                       password-parameter="j_password" authentication-success-handler-ref="ajaxAuthenticationSuccessHandler"
                       authentication-failure-handler-ref="ajaxAuthenticationFailureHandler"/>
 
-        <s:logout logout-url="/app/logout" success-handler-ref="ajaxLogoutSuccessHandler" delete-cookies="JSESSIONID"/>
+        <s:logout logout-url="/j2utils/logout" success-handler-ref="ajaxLogoutSuccessHandler" delete-cookies="JSESSIONID"/>
     </s:http>
 
     <s:authentication-manager>

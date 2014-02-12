@@ -36,7 +36,8 @@ public class Utilisateur extends GenericDomain {
 
     @JsonIgnore
     @ManyToMany
-    @JoinTable(name = "UTILISATEUR_ROLE", joinColumns = {@JoinColumn(name = "login")}, inverseJoinColumns = {@JoinColumn(name = "nom")})
+    @JoinTable(name = "utilisateur_role",
+            joinColumns = {@JoinColumn(name = "utilisateur")}, inverseJoinColumns = {@JoinColumn(name = "role")})
     private Set<Role> roles;
 
     public String getLogin() {
