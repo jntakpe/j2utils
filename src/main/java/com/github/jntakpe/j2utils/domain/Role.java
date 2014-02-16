@@ -2,8 +2,11 @@ package com.github.jntakpe.j2utils.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Rôle d'un utilisateur
@@ -18,12 +21,23 @@ public class Role extends GenericDomain {
     @Column(unique = true)
     private String nom;
 
+    @OneToMany(mappedBy = "role")
+    private Set<Utilisateur> utilisateurs = new HashSet<>();
+
     public String getNom() {
         return nom;
     }
 
     public void setNom(String nom) {
         this.nom = nom;
+    }
+
+    public Set<Utilisateur> getUtilisateurs() {
+        return utilisateurs;
+    }
+
+    public void setUtilisateurs(Set<Utilisateur> utilisateurs) {
+        this.utilisateurs = utilisateurs;
     }
 
     @Override

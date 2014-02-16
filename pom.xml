@@ -20,7 +20,7 @@
             <properties>
                 <mvn.spring.profile>dev</mvn.spring.profile>
                 <mvn.console.log.level>INFO</mvn.console.log.level>
-                <mvn.hibernate.generate>create</mvn.hibernate.generate>
+                <mvn.hibernate.generate>create-drop</mvn.hibernate.generate>
                 <mvn.hibernate.verbose>true</mvn.hibernate.verbose>
                 <mvn.hibernate.stats>true</mvn.hibernate.stats>
             </properties>

@@ -1,9 +1,13 @@
 package com.github.jntakpe.j2utils.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.validator.constraints.Email;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Set;
@@ -34,11 +38,9 @@ public class Utilisateur extends GenericDomain {
     @OneToMany(mappedBy = "utilisateur")
     private Set<ConnexionToken> connexionTokens;
 
-    @JsonIgnore
-    @ManyToMany
-    @JoinTable(name = "utilisateur_role",
-            joinColumns = {@JoinColumn(name = "utilisateur")}, inverseJoinColumns = {@JoinColumn(name = "role")})
-    private Set<Role> roles;
+    @JsonIgnoreProperties("utilisateurs")
+    @ManyToOne
+    private Role role;
 
     public String getLogin() {
         return login;
@@ -72,12 +74,12 @@ public class Utilisateur extends GenericDomain {
         this.connexionTokens = connexionTokens;
     }
 
-    public Set<Role> getRoles() {
-        return roles;
+    public Role getRole() {
+        return role;
     }
 
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
+    public void setRole(Role role) {
+        this.role = role;
     }
 
     @Override

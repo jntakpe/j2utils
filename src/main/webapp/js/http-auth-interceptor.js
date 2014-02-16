@@ -30,8 +30,8 @@
                 /**
                  * Call this function to indicate that authentication should not proceed.
                  * All deferred requests will be abandoned or rejected (if reason is provided).
-                 * @param data an optional argument to pass on to $broadcast.
-                 * @param reason if provided, the requests are rejected; abandoned otherwise.
+                 * @param [data] an optional argument to pass on to $broadcast.
+                 * @param [reason] if provided, the requests are rejected; abandoned otherwise.
                  */
                 loginCancelled: function (data, reason) {
                     httpBuffer.rejectAll(reason);

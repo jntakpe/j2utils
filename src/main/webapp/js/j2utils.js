@@ -2,9 +2,9 @@
 
 var j2utilsApp = angular.module('j2utilsApp', ['http-auth-interceptor', 'ngResource', 'ngRoute']);
 
-j2utilsApp.config(['$routeProvider', '$httpProvider', function ($routeProvider, $httpProvider) {
+j2utilsApp.config(['$routeProvider', function ($routeProvider) {
     $routeProvider
-        .when('/main', {templateUrl: 'views/main.html', controller: 'MainController'})
-        .otherwise({templateUrl: 'views/login.html', controller: 'LoginController'});
+        .when('/', {templateUrl: 'views/login.html', controller: 'LoginController'})
+        .otherwise({templateUrl: 'views/portail.html', controller: 'PortailController'});
 }]);
 

@@ -54,7 +54,7 @@
         <appender-ref ref="console"/>
     </root>
 
-    <logger name="fr.sg" additivity="false" level="TRACE">
+    <logger name="com.github.jntakpe" additivity="false" level="TRACE">
         <appender-ref ref="console"/>
         <appender-ref ref="audit-file"/>
         <appender-ref ref="troubleshooting-file"/>

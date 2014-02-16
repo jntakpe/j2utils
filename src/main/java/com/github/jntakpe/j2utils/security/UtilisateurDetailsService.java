@@ -1,6 +1,5 @@
 package com.github.jntakpe.j2utils.security;
 
-import com.github.jntakpe.j2utils.domain.Role;
 import com.github.jntakpe.j2utils.domain.Utilisateur;
 import com.github.jntakpe.j2utils.repository.UtilisateurRepository;
 import org.slf4j.Logger;
@@ -36,10 +35,8 @@ public class UtilisateurDetailsService implements UserDetailsService {
         if (utilisateur == null) {
             throw new UsernameNotFoundException("L'utilisateur " + login + " n'a pas été trouvé.");
         }
-        Collection<GrantedAuthority> roles = new ArrayList<GrantedAuthority>();
-        for (Role role : utilisateur.getRoles()) {
-            roles.add(new SimpleGrantedAuthority(role.getNom()));
-        }
+        Collection<GrantedAuthority> roles = new ArrayList<GrantedAuthority>(1);
+        roles.add(new SimpleGrantedAuthority(utilisateur.getRole().getNom()));
         return new org.springframework.security.core.userdetails.User(utilisateur.getLogin(), utilisateur.getPassword(), roles);
     }
 }
