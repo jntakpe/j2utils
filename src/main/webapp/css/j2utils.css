@@ -3,31 +3,72 @@ body {
     margin-bottom: 50px;
 }
 
-/* Page de login */
-.reg-page {
-    color: #555;
-    padding: 30px;
-    background: #fefefe;
-    border: solid 1px #eee;
-    box-shadow: 0 0 3px #eee;
+/* Conf de l'écran de login */
+.login-bg {
+    background: url(/img/bg-login-1.jpg) no-repeat center fixed;
+    background-size: cover;
 }
 
-.reg-header {
-    color: #555;
-    text-align: center;
-    margin-bottom: 35px;
-    border-bottom: solid 1px #eee;
+.reg-block {
+    width: 380px;
+    padding: 20px;
+    margin: 300px auto;
+    background: #fff;
 }
 
-.reg-header h2 {
-    font-size: 24px;
-    margin-bottom: 15px;
-}
-
-.reg-page label {
+.reg-block h2,
+.reg-block p,
+.reg-block p a {
     color: #777;
 }
 
-#login-frame {
-    margin-top: 120px;
+.reg-block-header h2 {
+    font-size: 28px;
+}
+
+.reg-block p a {
+    text-decoration: underline;
+}
+
+.reg-block p a:hover {
+    text-decoration: none;
+}
+
+.reg-block .input-group-addon {
+    color: #bbb;
+    background: none;
+    min-width: 40px;
+}
+
+.reg-block .form-control:focus {
+    box-shadow: none;
+    border-color: #999;
+}
+
+.reg-block .checkbox {
+    color: #555;
+    margin-bottom: 20px;
+    font-weight: normal;
+}
+
+.reg-block-header {
+    padding-bottom: 5px;
+    margin-bottom: 30px;
+    border-bottom: solid 1px #eee;
+}
+
+.reg-block-header h2 {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.reg-block-header p {
+    text-align: center;
+}
+
+@media (max-width: 500px) {
+    .reg-block {
+        width: 300px;
+        margin: 60px auto;
+    }
 }
