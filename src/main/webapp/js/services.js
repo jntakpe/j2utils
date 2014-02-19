@@ -7,22 +7,39 @@ j2utilsApp.factory('Utilisateur', ['$resource',
 j2utilsApp.factory('AuthService', ['$rootScope', '$http', 'authService', function ($rootScope, $http, authService) {
         "use strict";
         return {
-            //Vérifie si l'utilisateur est connecté
-            authenticate: function () {
+            /**
+             * Vérifie si l'utilisateur est connecté
+             * @param [authOK] callback en cas d'authentification
+             * @param [authKO] callback en cas d'utilisateur non autorisé
+             */
+            authenticate: function (authOK, authKO) {
                 $http.get('j2utils/rest/auth')
                     .success(function (data) {
                         $rootScope.login = data;
                         if (data === '') {
                             $rootScope.$broadcast('event:auth-loginRequired');
+                            if (authKO) {
+                                authKO();
+                            }
                         } else {
                             $rootScope.$broadcast('event:auth-authConfirmed');
+                            if (authOK) {
+                                authOK(data);
+                            }
                         }
                     });
             },
-            //Tentative de connexion (envoi formulaire de login)
-            login: function (param) {
-                var data = "j_username=" + param.username + "&j_password=" + param.password + "&_spring_security_remember_me=" +
-                    param.rememberMe + "&submit=Login";
+            /**
+             * Tentative de connexion (envoi formulaire de login)
+             * @param username valeur du nom de l'utilisateur
+             * @param password valeur du mot de passe
+             * @param rememberMe valeur de la checkbox 'Rester connecté ?'
+             * @param [loginOK] callback en cas de réussite de l'authentification
+             * @param [loginFail] callback en cas d'échec de l'authentification
+             */
+            login: function (username, password, rememberMe, loginOK, loginFail) {
+                var data = "j_username=" + username + "&j_password=" + password + "&_spring_security_remember_me=" +
+                    rememberMe + "&submit=Login";
                 $http.post('j2utils/authentication', data, {
                     headers: {
                         "Content-Type": "application/x-www-form-urlencoded"
@@ -31,22 +48,28 @@ j2utilsApp.factory('AuthService', ['$rootScope', '$http', 'authService', functio
                 }).success(function (data, status, headers, config) {
                     $rootScope.authenticationError = false;
                     authService.loginConfirmed();
-                    if (param.success) {
-                        param.success(data, status, headers, config);
+                    if (loginOK) {
+                        loginOK(data, status, headers, config);
                     }
                 }).error(function (data, status, headers, config) {
                     $rootScope.authenticationError = true;
-                    if (param.error) {
-                        param.error(data, status, headers, config);
+                    if (loginFail) {
+                        loginFail(data, status, headers, config);
                     }
                 });
             },
-            //Tentative de déconnexion
-            logout: function () {
+            /**
+             * Tentative de déconnexion
+             * @param [lougoutOK] callback de déconnexion
+             */
+            logout: function (lougoutOK) {
                 $rootScope.authenticationError = false;
-                $http.get('j2utils/logout').success(function () {
+                $http.get('j2utils/logout').success(function (data, status, headers, config) {
                     $rootScope.login = null;
                     authService.loginCancelled();
+                    if (lougoutOK) {
+                        lougoutOK(data, status, headers, config);
+                    }
                 });
             }
         };
@@ -55,24 +78,12 @@ j2utilsApp.factory('AuthService', ['$rootScope', '$http', 'authService', functio
         function ($rootScope, $location, AuthService, Utilisateur) {
             "use strict";
             $rootScope.hasRole = function (role) {
-                if ($rootScope.account === undefined) {
-                    return false;
-                }
-
-                if ($rootScope.account.roles === undefined) {
-                    return false;
-                }
-
-                if ($rootScope.account.roles[role] === undefined) {
-                    return false;
-                }
-
-                return $rootScope.account.roles[role];
+                return role === $rootScope.utilisateur.role.nom;
             };
 
             $rootScope.$on("$routeChangeStart", function (event, next, current) {
                 //Vérifie si l'utilisateur est authentifié.
-                AuthService.authenticate({}, function () {
+                AuthService.authenticate(function () {
                     $rootScope.authOK = true;
                 });
             });
@@ -85,7 +96,7 @@ j2utilsApp.factory('AuthService', ['$rootScope', '$http', 'authService', functio
                 }
             });
 
-            //FOnction utilisée lorsque l'utilisateur s'est authentifié
+            //Fonction utilisée lorsque l'utilisateur s'est authentifié
             $rootScope.$on('event:auth-authConfirmed', function () {
                 $rootScope.authOK = true;
                 $rootScope.utilisateur = Utilisateur.get();
