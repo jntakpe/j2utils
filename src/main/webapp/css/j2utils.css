@@ -3,6 +3,11 @@ body {
     margin-bottom: 50px;
 }
 
+/* Ouverture des dropdown */
+ul.nav li.dropdown:hover > ul.dropdown-menu {
+    display: block;
+}
+
 /* Conf de l'écran de login */
 .login-bg {
     background: url(/img/bg-login-1.jpg) no-repeat center fixed;
