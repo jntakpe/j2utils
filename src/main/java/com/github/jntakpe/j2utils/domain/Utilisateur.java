@@ -4,10 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.validator.constraints.Email;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Set;
@@ -39,8 +36,12 @@ public class Utilisateur extends GenericDomain {
     private Set<ConnexionToken> connexionTokens;
 
     @JsonIgnoreProperties("utilisateurs")
-    @ManyToOne
+    @ManyToOne(optional = false)
     private Role role;
+
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Reservation reservation;
 
     public String getLogin() {
         return login;
@@ -80,6 +81,14 @@ public class Utilisateur extends GenericDomain {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public Reservation getReservation() {
+        return reservation;
+    }
+
+    public void setReservation(Reservation reservation) {
+        this.reservation = reservation;
     }
 
     @Override

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration scan="true">
+
+    <!-- Console -->
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>%-4relative [%thread] %-5level %logger{35} - %msg %n</pattern>
+        </encoder>
+    </appender>
+
+    <root level="WARN">
+        <appender-ref ref="console"/>
+    </root>
+
+    <logger name="com.github.jntakpe" additivity="false" level="TRACE">
+        <appender-ref ref="console"/>
+    </logger>
+
+    <logger name="ch.qos.logback" level="WARN">
+        <appender-ref ref="console"/>
+    </logger>
+
+    <logger name="net.sf.ehcache" level="WARN">
+        <appender-ref ref="console"/>
+    </logger>
+
+    <logger name="org.apache" level="WARN">
+        <appender-ref ref="console"/>
+    </logger>
+
+    <logger name="org.hibernate.validator" level="WARN">
+        <appender-ref ref="console"/>
+    </logger>
+
+    <logger name="org.hibernate" level="WARN">
+        <appender-ref ref="console"/>
+    </logger>
+
+    <logger name="org.springframework" level="WARN">
+        <appender-ref ref="console"/>
+    </logger>
+
+    <logger name="org.springframework.web" level="WARN">
+        <appender-ref ref="console"/>
+    </logger>
+
+    <logger name="org.springframework.security" level="WARN">
+        <appender-ref ref="console"/>
+    </logger>
+
+    <logger name="org.springframework.cache" level="WARN">
+        <appender-ref ref="console"/>
+    </logger>
+
+
+</configuration>

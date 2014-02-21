@@ -29,7 +29,7 @@
             <props>
                 <prop key="user">postgres</prop>
                 <prop key="password">sopra*</prop>
-                <prop key="databaseName">j2utils</prop>
+                <prop key="databaseName">j2utils-test</prop>
                 <prop key="serverName">localhost</prop>
             </props>
         </property>
