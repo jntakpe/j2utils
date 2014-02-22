@@ -25,7 +25,6 @@ public class Reservation extends GenericDomain {
     @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
     private LocalDate localDate;
 
-    @NotNull
     @Min(1)
     @Max(4)
     private Byte terrain;

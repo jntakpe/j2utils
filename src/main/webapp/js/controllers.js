@@ -10,13 +10,14 @@ j2utilsApp.controller('LoginController', ['$scope', '$location', 'AuthService', 
             $location.path('/portail');
         });
     };
-
-    $scope.openMenu = function () {
-
-    };
 }]);
 
 j2utilsApp.controller('LogoutController', ['AuthService', function (AuthService) {
     "use strict";
     AuthService.logout();
+}]);
+
+j2utilsApp.controller('BadmintonController', ['$scope', '$location', function ($scope, $location) {
+    "use strict";
+
 }]);

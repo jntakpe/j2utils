@@ -15,5 +15,5 @@ public interface ConnexionTokenRepository extends JpaRepository<ConnexionToken, 
 
     ConnexionToken findBySeries(String series);
 
-    List<ConnexionToken> findByTokenTsDateBefore(LocalDate localDate);
+    List<ConnexionToken> findByTokenTsBefore(LocalDate tokenTs);
 }

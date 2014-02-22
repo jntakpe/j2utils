@@ -15,7 +15,6 @@ j2utilsApp.factory('AuthService', ['$rootScope', '$http', 'authService', functio
             authenticate: function (authOK, authKO) {
                 $http.get('j2utils/rest/auth')
                     .success(function (data) {
-                        $rootScope.login = data;
                         if (data === '') {
                             $rootScope.$broadcast('event:auth-loginRequired');
                             if (authKO) {
@@ -65,7 +64,6 @@ j2utilsApp.factory('AuthService', ['$rootScope', '$http', 'authService', functio
             logout: function (lougoutOK) {
                 $rootScope.authenticationError = false;
                 $http.get('j2utils/logout').success(function (data, status, headers, config) {
-                    $rootScope.login = null;
                     authService.loginCancelled();
                     if (lougoutOK) {
                         lougoutOK(data, status, headers, config);
@@ -77,9 +75,6 @@ j2utilsApp.factory('AuthService', ['$rootScope', '$http', 'authService', functio
     .run(['$rootScope', '$location', 'AuthService', 'Utilisateur',
         function ($rootScope, $location, AuthService, Utilisateur) {
             "use strict";
-            $rootScope.hasRole = function (role) {
-                return role === $rootScope.utilisateur.role.nom;
-            };
 
             $rootScope.$on("$routeChangeStart", function (event, next, current) {
                 //Vérifie si l'utilisateur est authentifié.

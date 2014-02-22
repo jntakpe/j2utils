@@ -39,7 +39,7 @@ public class UtilisateurService {
     @Transactional
     public void removeConnexionToken() {
         LocalDate now = new LocalDate();
-        List<ConnexionToken> tokens = connexionTokenRepository.findByTokenTsDateBefore(now.minusMonths(1));
+        List<ConnexionToken> tokens = connexionTokenRepository.findByTokenTsBefore(now.minusMonths(1));
         for (ConnexionToken token : tokens) {
             logger.debug("Suppression du token de connexion {}", token.getSeries());
             token.getUtilisateur().getConnexionTokens().remove(token);

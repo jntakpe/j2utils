@@ -5,6 +5,7 @@ j2utilsApp.config(['$routeProvider', function ($routeProvider) {
     $routeProvider
         .when('/', {templateUrl: 'views/login.html', controller: 'LoginController'})
         .when('/logout', {templateUrl: 'views/login.html', controller: 'LogoutController'})
+        .when('/badminton', {templateUrl: 'views/badminton.html', controller: 'BadmintonController'})
         .otherwise({templateUrl: 'views/portail.html', controller: 'PortailController'});
 }]);
 
