@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="plugins/glyphicons/css/glyphicons.css">
 </head>
 <body ng-class="authOK ? '' : 'login-bg'">
-<div ng-if="authOK">
+<div ng-show="authOK">
     <div class="top">
         <div class="container">
             <ul class="loginbar pull-right">
@@ -65,17 +65,10 @@
                         <li class="dropdown">
 
                             <a href="#/badminton" class="dropdown-toggle">
-                                <i class="glyphicons table_tennis"></i> Badminton<i class="icon-angle-down"></i>
+                                <i class="icon-cogs"></i> Administration<i class="icon-angle-down"></i>
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a href="index.html">Option 1: Default Page</a></li>
-                                <li><a href="page_home1.html">Option 2: Layer Slider</a></li>
-                                <li><a href="page_home2.html">Option 3: Revolution Slider</a></li>
-                                <li><a href="page_home3.html">Option 4: Amazing Content</a></li>
-                                <li><a href="page_home4.html">Option 5: Home Sidebar</a></li>
-                                <li><a href="page_home5.html">Option 6: Home Flatty</a></li>
-                                <li><a href="page_home6.html">Option 7: Home Magazine</a></li>
-                                <li><a href="page_home7.html">Option 8: Home Portfolio</a></li>
+                                <li><a href="#/sessions"><i class="icon-cloud"></i> Sessions</a></li>
                             </ul>
                         </li>
                         <li class="hidden-sm"><a class="search"><i class="icon-search search-btn"></i></a></li>
@@ -93,8 +86,10 @@
         </div>
     </div>
 </div>
-<div ng-view=""><!-- Ici sont insérées les vues gérées par AngularJS --></div>
-<div ng-if="authOK">
+<div class="container">
+    <div ng-view=""><!-- Ici sont insérées les vues gérées par AngularJS --></div>
+</div>
+<div ng-show="authOK">
     <div class="navbar navbar-default navbar-fixed-bottom copyright">
         <div class="container">
             <div class="col-md-6">

@@ -1,0 +1,36 @@
+<div class="container">
+
+    <h2>Sessions actives pour : [<b>{{utilisateur.login}}</b>]</h2>
+
+    <div class="alert alert-success" ng-show="success">
+        <i class="icon-check"></i><strong> Session invalidée</strong>
+    </div>
+    <div class="alert alert-danger" ng-show="error">
+        <i class="icon-warning-sign"></i><strong> Impossible d'invalider la session</strong>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Adresse IP</th>
+                <th>User agent</th>
+                <th>Date</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="session in sessions">
+                <td>{{session.ip}}</td>
+                <td>{{session.userAgent}}</td>
+                <td>{{session.tokenTs}}</td>
+                <td>
+                    <button type="submit" class="btn btn-primary" ng-click="invalidate(session.series)">
+                        <i class="icon-trash"></i> Invalider la session
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

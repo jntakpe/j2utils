@@ -17,6 +17,25 @@ j2utilsApp.controller('LogoutController', ['AuthService', function (AuthService)
     AuthService.logout();
 }]);
 
+j2utilsApp.controller('SessionsController', ['$scope', 'resolvedSessions', 'Sessions', function ($scope, resolvedSessions, Sessions) {
+    "use strict";
+    $scope.success = null;
+    $scope.error = null;
+    $scope.sessions = resolvedSessions;
+    $scope.invalidate = function (series) {
+        Sessions.delete({series: encodeURIComponent(series)},
+            function () {
+                $scope.success = true;
+                $scope.error = null;
+                $scope.sessions = Sessions.get();
+            },
+            function () {
+                $scope.success = null;
+                $scope.error = true;
+            });
+    };
+}]);
+
 j2utilsApp.controller('BadmintonController', ['$scope', '$location', function ($scope, $location) {
     "use strict";
 
