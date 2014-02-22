@@ -71,24 +71,13 @@
                                 <li><a href="#/sessions"><i class="icon-cloud"></i> Sessions</a></li>
                             </ul>
                         </li>
-                        <li class="hidden-sm"><a class="search"><i class="icon-search search-btn"></i></a></li>
                     </ul>
-                    <div class="search-open">
-                        <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Search">
-                        <span class="input-group-btn">
-                            <button class="btn-u" type="button">Go</button>
-                        </span>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<div class="container">
-    <div ng-view=""><!-- Ici sont insérées les vues gérées par AngularJS --></div>
-</div>
+<div ng-view=""></div>
 <div ng-show="authOK">
     <div class="navbar navbar-default navbar-fixed-bottom copyright">
         <div class="container">

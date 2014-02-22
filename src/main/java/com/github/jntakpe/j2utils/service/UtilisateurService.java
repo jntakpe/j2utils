@@ -37,7 +37,7 @@ public class UtilisateurService {
 
     @Scheduled(cron = "0 0 0 * * ?")
     @Transactional
-    public void removeConnexionToken() {
+    public void automaticRemove() {
         LocalDate now = new LocalDate();
         List<ConnexionToken> tokens = connexionTokenRepository.findByTokenTsBefore(now.minusMonths(1));
         for (ConnexionToken token : tokens) {

@@ -3,10 +3,7 @@ package com.github.jntakpe.j2utils.domain;
 import org.hibernate.annotations.Type;
 import org.joda.time.LocalDate;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -23,7 +20,7 @@ public class Reservation extends GenericDomain {
 
     @NotNull
     @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
-    private LocalDate localDate;
+    private LocalDate jour;
 
     @Min(1)
     @Max(4)
@@ -35,12 +32,17 @@ public class Reservation extends GenericDomain {
     @OneToMany(mappedBy = "reservation", fetch = FetchType.EAGER)
     private Set<Utilisateur> joueurs = new HashSet<>();
 
-    public LocalDate getLocalDate() {
-        return localDate;
+    @PrePersist
+    public void populateJour() {
+        this.setJour(new LocalDate());
     }
 
-    public void setLocalDate(LocalDate localDate) {
-        this.localDate = localDate;
+    public LocalDate getJour() {
+        return jour;
+    }
+
+    public void setJour(LocalDate localDate) {
+        this.jour = localDate;
     }
 
     public Byte getTerrain() {
@@ -74,21 +76,21 @@ public class Reservation extends GenericDomain {
 
         Reservation that = (Reservation) o;
 
-        if (localDate != null ? !localDate.equals(that.localDate) : that.localDate != null) return false;
+        if (jour != null ? !jour.equals(that.jour) : that.jour != null) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        return localDate != null ? localDate.hashCode() : 0;
+        return jour != null ? jour.hashCode() : 0;
     }
 
     @Override
     public String toString() {
         return "Reservation{" +
                 "terrain=" + terrain +
-                ", localDate=" + localDate +
+                ", localDate=" + jour +
                 ", joueurs=" + joueurs +
                 '}';
     }
