@@ -44,10 +44,10 @@
         <property name="jpaProperties">
             <props>
                 <prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQL82Dialect</prop>
-                <prop key="hibernate.hbm2ddl.auto">${hibernate.generate}</prop>
-                <prop key="hibernate.show_sql">${hibernate.verbose}</prop>
-                <prop key="hibernate.format_sql">${hibernate.verbose}</prop>
-                <prop key="hibernate.generate_statistics">${hibernate.stats}</prop>
+                <prop key="hibernate.hbm2ddl.auto">create</prop>
+                <prop key="hibernate.show_sql">true</prop>
+                <prop key="hibernate.format_sql">true</prop>
+                <prop key="hibernate.generate_statistics">false</prop>
                 <prop key="hibernate.cache.use_second_level_cache">false</prop>
                 <prop key="hibernate.cache.use_query_cache">false</prop>
             </props>
@@ -60,10 +60,8 @@
 
     <bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor"/>
 
-    <beans profile="dev">
-        <jdbc:initialize-database>
-            <jdbc:script location="classpath:sql/utilisateurs.sql"/>
-        </jdbc:initialize-database>
-    </beans>
+    <jdbc:initialize-database>
+        <jdbc:script location="classpath:sql/utilisateurs.sql"/>
+    </jdbc:initialize-database>
 
 </beans>

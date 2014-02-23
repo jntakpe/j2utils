@@ -23,15 +23,8 @@ public class ReservationService extends GenericService<Reservation> {
     @Transactional
     @Scheduled(cron = "0 0 0 * 2-4 ?")
     public void automaticAdd() {
-        LocalDate date = getNextDate(new LocalDate().getDayOfWeek());
+        LocalDate date = new LocalDate().plusWeeks(1);
         save(date);
-    }
-
-    @Transactional
-    public Reservation save(LocalDate date) {
-        Reservation reservation = new Reservation();
-        reservation.setJour(date);
-        return save(reservation);
     }
 
     @Transactional
@@ -41,6 +34,13 @@ public class ReservationService extends GenericService<Reservation> {
         if (reservationRepository.findByJour(nextTuesday) == null) save(nextTuesday);
         if (reservationRepository.findByJour(nextThursday) == null) save(nextThursday);
         return findAll();
+    }
+
+    @Transactional
+    private Reservation save(LocalDate date) {
+        Reservation reservation = new Reservation();
+        reservation.setJour(date);
+        return save(reservation);
     }
 
     private LocalDate getNextDate(int dayOfWeek) {

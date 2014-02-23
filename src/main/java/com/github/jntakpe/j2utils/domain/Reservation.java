@@ -1,7 +1,9 @@
 package com.github.jntakpe.j2utils.domain;
 
+import com.github.jntakpe.j2utils.validation.ReservationDone;
 import org.hibernate.annotations.Type;
 import org.joda.time.LocalDate;
+import org.joda.time.LocalTime;
 
 import javax.persistence.*;
 import javax.validation.constraints.Max;
@@ -20,22 +22,23 @@ public class Reservation extends GenericDomain {
 
     @NotNull
     @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
+    @Column(unique = true)
     private LocalDate jour;
 
-    @Min(1)
-    @Max(4)
+    @NotNull(groups = ReservationDone.class)
+    private LocalTime creneau;
+
+    @NotNull(groups = ReservationDone.class)
+    @Min(value = 1, groups = ReservationDone.class)
+    @Max(value = 4, groups = ReservationDone.class)
     private Byte terrain;
 
     @ManyToOne
+    @NotNull(groups = ReservationDone.class)
     private Utilisateur payeur;
 
     @OneToMany(mappedBy = "reservation", fetch = FetchType.EAGER)
     private Set<Utilisateur> joueurs = new HashSet<>();
-
-    @PrePersist
-    public void populateJour() {
-        this.setJour(new LocalDate());
-    }
 
     public LocalDate getJour() {
         return jour;
@@ -43,6 +46,14 @@ public class Reservation extends GenericDomain {
 
     public void setJour(LocalDate localDate) {
         this.jour = localDate;
+    }
+
+    public LocalTime getCreneau() {
+        return creneau;
+    }
+
+    public void setCreneau(LocalTime creneau) {
+        this.creneau = creneau;
     }
 
     public Byte getTerrain() {
