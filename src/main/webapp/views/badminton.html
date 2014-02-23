@@ -5,4 +5,23 @@
         <li class="active">Badminton</li>
     </ul>
 </div>
+<div>
+    <table>
+        <thead>
+        <tr>
+            <th>Jour</th>
+            <th>Créneau</th>
+            <th>Terrain</th>
+            <th>Payeur</th>
+            <th>Joueurs</th>
+        </tr>
+        </thead>
+        <tbody ng-repeat="reservation in reservations">
+        <td>{{ reservation.jour }}</td>
+        <td>{{ reservation.creneau }}</td>
+        <td>{{ reservation.terrain }}</td>
+        <td>{{ reservation.payeur }}</td>
+        <td>{{ reservation.joueurs }}</td>
+        </tbody>
+    </table>
 </div>

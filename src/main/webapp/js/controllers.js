@@ -40,5 +40,4 @@ j2utilsApp.controller('BadmintonController', ['$scope', 'resolvedReservations', 
     function ($scope, resolvedReservations, reservations) {
         "use strict";
         $scope.reservations = resolvedReservations;
-        console.log('toto');
     }]);
