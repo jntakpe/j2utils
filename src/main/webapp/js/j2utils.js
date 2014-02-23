@@ -10,7 +10,11 @@ j2utilsApp.config(['$routeProvider', function ($routeProvider) {
                 return Sessions.get();
             }]
         }})
-        .when('/badminton', {templateUrl: 'views/badminton.html', controller: 'BadmintonController'})
+        .when('/badminton', {templateUrl: 'views/badminton.html', controller: 'BadmintonController', resolve: {
+            resolvedReservations: ['Reservations', function (Reservations) {
+                return Reservations.get();
+            }]
+        }})
         .otherwise({templateUrl: 'views/portail.html', controller: 'PortailController'});
 }]);
 

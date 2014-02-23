@@ -16,7 +16,7 @@ import java.util.List;
  * @author jntakpe
  */
 @RestController
-@RequestMapping("/j2utils/rest/reservation")
+@RequestMapping("/j2utils/rest/reservations")
 public class ReservationResource {
 
     @Autowired
@@ -24,6 +24,6 @@ public class ReservationResource {
 
     @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Reservation> findAll() {
-        return reservationService.findAll();
+        return reservationService.findAllAndAddIfNeeded();
     }
 }

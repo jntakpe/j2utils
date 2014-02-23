@@ -8,6 +8,11 @@ j2utilsApp.factory('Sessions', ['$resource', function ($resource) {
     return $resource('j2utils/rest/utilisateur/sessions/:series', {}, {get: {method: 'GET', isArray: true}});
 }]);
 
+j2utilsApp.factory('Reservations', ['$resource', function ($resource) {
+    "use strict";
+    return $resource('j2utils/rest/reservations/:reservation', {}, {get: {method: 'GET', isArray: true}});
+}]);
+
 j2utilsApp.factory('AuthService', ['$rootScope', '$http', 'authService', function ($rootScope, $http, authService) {
         "use strict";
         return {

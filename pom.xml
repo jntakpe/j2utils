@@ -86,7 +86,7 @@
         <joda-time.version>2.3</joda-time.version>
         <joda-convert.version>1.6</joda-convert.version>
         <jadira.version>3.1.0.CR10</jadira.version>
-        <jackson.version>2.3.0</jackson.version>
+        <jackson.version>2.3.1</jackson.version>
         <querydsl.version>3.2.4</querydsl.version>
         <metrics.version>3.0.1</metrics.version>
         <hikari.version>1.2.8</hikari.version>
@@ -330,7 +330,12 @@
                 <version>${jackson.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.mysema.querydsl</groupId>
+                <groupId>com.fasterxml.jackson.datatype</groupId>
+                <artifactId>jackson-datatype-joda</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+            <dependency>
+            <groupId>com.mysema.querydsl</groupId>
                 <artifactId>querydsl-apt</artifactId>
                 <version>${querydsl.version}</version>
             </dependency>
@@ -579,6 +584,10 @@
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-joda</artifactId>
         </dependency>
         <dependency>
             <groupId>com.mysema.querydsl</groupId>
