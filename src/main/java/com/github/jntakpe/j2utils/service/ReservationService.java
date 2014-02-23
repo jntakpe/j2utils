@@ -20,7 +20,6 @@ public class ReservationService extends GenericService<Reservation> {
     @Autowired
     private ReservationRepository reservationRepository;
 
-
     @Transactional
     @Scheduled(cron = "0 0 0 * 2-4 ?")
     public void automaticAdd() {
