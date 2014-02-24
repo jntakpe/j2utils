@@ -27,7 +27,7 @@ j2utilsApp.controller('SessionsController', ['$scope', 'resolvedSessions', 'Sess
             function () {
                 $scope.success = true;
                 $scope.error = null;
-                $scope.sessions = Sessions.get();
+                $scope.sessions = Sessions.query();
             },
             function () {
                 $scope.success = null;
@@ -40,4 +40,14 @@ j2utilsApp.controller('BadmintonController', ['$scope', 'resolvedReservations', 
     function ($scope, resolvedReservations, reservations) {
         "use strict";
         $scope.reservations = resolvedReservations;
+
+        $scope.rowBg = function (reservation) {
+            if (!reservation.creneau) {
+                return 'danger';
+            } else if (reservation.joueurs.length === 4) {
+                return 'success';
+            } else {
+                return 'warning';
+            }
+        };
     }]);

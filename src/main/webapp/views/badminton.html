@@ -5,8 +5,8 @@
         <li class="active">Badminton</li>
     </ul>
 </div>
-<div>
-    <table>
+<div class="container">
+    <table class="table table-striped table-hover table-condensed">
         <thead>
         <tr>
             <th>Jour</th>
@@ -17,11 +17,13 @@
         </tr>
         </thead>
         <tbody ng-repeat="reservation in reservations">
-        <td>{{ reservation.jour }}</td>
-        <td>{{ reservation.creneau }}</td>
-        <td>{{ reservation.terrain }}</td>
-        <td>{{ reservation.payeur }}</td>
-        <td>{{ reservation.joueurs }}</td>
+        <tr ng-class="rowBg(reservation)">
+            <td>{{ reservation.jour | localDateFilter}}</td>
+            <td>{{ reservation.creneau }}</td>
+            <td>{{ reservation.terrain }}</td>
+            <td>{{ reservation.payeur }}</td>
+            <td>{{ reservation.joueurs }}</td>
+        </tr>
         </tbody>
     </table>
 </div>
