@@ -50,4 +50,33 @@ j2utilsApp.controller('BadmintonController', ['$scope', 'resolvedReservations', 
                 return 'warning';
             }
         };
+
+        $scope.reservAction = function (reservation) {
+            var role = null;
+            if ($scope.utilisateur.role) {
+                role = $scope.utilisateur.role.nom;
+            }
+            if (reservation.creneau === null && role === 'ROLE_ADMIN') {
+                return '0';
+            } else if (reservation.creneau !== null && reservation.joueurs[$scope.utilisateur.login]) {
+                return '1';
+            } else if (reservation.creneau !== null) {
+                return '2';
+            } else {
+                return '3';
+            }
+
+        };
+
+        $scope.reserv = function (reservation) {
+            console.log("reserv court");
+        };
+
+        $scope.enreg = function (reservation) {
+            console.log("enreg");
+        };
+
+        $scope.annul = function (reservation) {
+            console.log("annul");
+        };
     }]);
