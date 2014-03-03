@@ -14,7 +14,7 @@
             <th>Terrain</th>
             <th>Payeur</th>
             <th>Joueurs</th>
-            <th>Action</th>
+            <th>Actions</th>
         </tr>
         </thead>
         <tbody ng-repeat="reservation in reservations">
@@ -24,16 +24,44 @@
             <td>{{ reservation.terrain }}</td>
             <td>{{ reservation.payeur }}</td>
             <td>{{ reservation.joueurs }}</td>
-            <td ng-switch="reservAction(reservation)">
-                <button ng-switch-when="0" ng-click="reserv(reservation)" class="btn btn-xs btn-success">
-                    <i class="icon-plus"></i> Ajouter une réservation
-                </button>
-                <button ng-switch-when="1" ng-click="enreg(reservation)" ngclass="btn btn-xs btn-success">
-                    <i class="icon-plus"></i> S'inscrire
-                </button>
-                <button ng-switch-when="2" ng-click="annul(reservation)" class="btn btn-xs btn-warning">
-                    <i class="icon-minus"></i> Se désinscrire
-                </button>
+            <td>
+                <div ng-switch="reservAction(reservation)" class="btn-group">
+                    <div ng-switch-when="2">
+                        <button ng-click="reserv(reservation)" class="btn btn-xs btn-success">
+                            <i class="icon-plus"></i> Ajouter une réservation
+                        </button>
+                    </div>
+                    <div ng-switch-when="1" class="btn-group">
+                        <button ng-click="enreg(reservation)" class="btn btn-xs btn-success">
+                            <i class="icon-plus"></i> S'inscrire
+                        </button>
+                        <button type="button" class="btn btn-xs btn-success dropdown-toggle" data-toggle="dropdown">
+                            <span class="caret"></span>
+                            <span class="sr-only">Toggle Dropdown</span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="#"><i class="icon-plus"></i> Inscrire un joueur</a></li>
+                            <li><a href="#"><i class="icon-signout"></i> Désinscrire un joueur</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#"><i class="icon-edit"></i> Modifier la réservation</a></li>
+                        </ul>
+                    </div>
+                    <div ng-switch-when="0" class="btn-group">
+                        <button ng-click="annul(reservation)" class="btn btn-xs btn-warning">
+                            <i class="icon-signout"></i> Se désinscrire
+                        </button>
+                        <button type="button" class="btn btn-xs btn-warning dropdown-toggle" data-toggle="dropdown">
+                            <span class="caret"></span>
+                            <span class="sr-only">Toggle Dropdown</span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="#"><i class="icon-plus"></i> Inscrire un joueur</a></li>
+                            <li><a href="#"><i class="icon-signout"></i> Désinscrire un joueur</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#"><i class="icon-edit"></i> Modifier la réservation</a></li>
+                        </ul>
+                    </div>
+                </div>
             </td>
         </tr>
         </tbody>
