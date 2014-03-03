@@ -36,8 +36,8 @@ j2utilsApp.controller('SessionsController', ['$scope', 'resolvedSessions', 'Sess
     };
 }]);
 
-j2utilsApp.controller('BadmintonController', ['$scope', 'resolvedReservations', 'Reservations',
-    function ($scope, resolvedReservations, reservations) {
+j2utilsApp.controller('BadmintonController', ['$scope', '$modal', 'resolvedReservations', 'Reservations',
+    function ($scope, $modal, resolvedReservations, reservations) {
         "use strict";
         $scope.reservations = resolvedReservations;
 
@@ -70,6 +70,15 @@ j2utilsApp.controller('BadmintonController', ['$scope', 'resolvedReservations', 
 
         $scope.reserv = function (reservation) {
             console.log("reserv court");
+            var modalInstance = $modal.open({
+                templateUrl: 'views/modals/badminton-reserv.html'
+            });
+
+            modalInstance.result.then(function (selectedItem) {
+                $scope.selected = selectedItem;
+            }, function () {
+                console.log('Modal dismissed at: ' + new Date());
+            });
         };
 
         $scope.enreg = function (reservation) {
@@ -80,3 +89,14 @@ j2utilsApp.controller('BadmintonController', ['$scope', 'resolvedReservations', 
             console.log("annul");
         };
     }]);
+
+//j2utilsApp.controller('ReservationController', ['$scope', '$modalInstance', 'joueurs',
+//    function ($scope, $modalInstance, joueurs) {
+//        "use strict";
+//        console.log("coucou MODALLLLLLLLLLLLL");
+//    }]);
+
+var ReservController = function ($scope, $modalInstance, joueurs) {
+    "use strict";
+    console.log("coucou MODALLLLLLLLLLLLL");
+}

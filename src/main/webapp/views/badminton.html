@@ -26,8 +26,8 @@
             <td>{{ reservation.joueurs }}</td>
             <td>
                 <div ng-switch="reservAction(reservation)" class="btn-group">
-                    <div ng-switch-when="2">
-                        <button ng-click="reserv(reservation)" class="btn btn-xs btn-success">
+                    <div ng-switch-when="0">
+                    <button ng-click="reserv(reservation)" class="btn btn-xs btn-success">
                             <i class="icon-plus"></i> Ajouter une réservation
                         </button>
                     </div>
@@ -46,8 +46,8 @@
                             <li><a href="#"><i class="icon-edit"></i> Modifier la réservation</a></li>
                         </ul>
                     </div>
-                    <div ng-switch-when="0" class="btn-group">
-                        <button ng-click="annul(reservation)" class="btn btn-xs btn-warning">
+                    <div ng-switch-when="2" class="btn-group">
+                    <button ng-click="annul(reservation)" class="btn btn-xs btn-warning">
                             <i class="icon-signout"></i> Se désinscrire
                         </button>
                         <button type="button" class="btn btn-xs btn-warning dropdown-toggle" data-toggle="dropdown">
